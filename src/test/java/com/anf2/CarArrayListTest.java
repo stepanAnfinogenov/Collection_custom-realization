@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CarArrayListTest {
     private CarList carArrayList;
 
@@ -31,6 +29,30 @@ class CarArrayListTest {
     }
 
     @Test
+    void addByIndex_whenAddElementWithIndex11_elementAddedSuccessfully() {
+        Car car = new Car("Toyota", 5);
+        carArrayList.add(car, 11);
+        Assert.assertEquals(101, carArrayList.size());
+        Assert.assertEquals(car, carArrayList.get(11));
+    }
+
+    @Test
+    void addByIndex_whenAddElementWithIntoFirstPosition_elementAddedSuccessfully() {
+        Car car = new Car("Toyota", 5);
+        carArrayList.add(car, 0);
+        Assert.assertEquals(101, carArrayList.size());
+        Assert.assertEquals(car, carArrayList.get(0));
+    }
+
+    @Test
+    void addByIndex_whenAddElementWithIntoLastPosition_elementAddedSuccessfully() {
+        Car car = new Car("Toyota", 5);
+        carArrayList.add(car, carArrayList.size());
+        Assert.assertEquals(101, carArrayList.size());
+        Assert.assertEquals(car, carArrayList.get(100));
+    }
+
+    @Test
     void remove_whenElementRemoved_sizeMustBeDecreased() {
         Car car = new Car("Toyota", 5);
         carArrayList.add(car);
@@ -48,8 +70,13 @@ class CarArrayListTest {
 
     @Test
     void removeAt_whenElementRemovedByIndex_sizeMustBeDecreased() {
-        Assert.assertTrue(carArrayList.removeAt(5));
+        Car car6 = carArrayList.get(6);
+        Car car7 = carArrayList.get(7);
+
+        Assert.assertTrue(carArrayList.removeAt(6));
         Assert.assertEquals(99, carArrayList.size());
+        Assert.assertFalse(car6.equals(carArrayList.get(6)));
+        Assert.assertTrue(car7.equals(carArrayList.get(6)));
     }
 
     @Test
