@@ -1,6 +1,9 @@
 <button onclick="fetchData()">Fetch Data</button>
 <div id="result" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;"></div>
 
+<button onclick="fetchData()">Fetch Data</button>
+<div id="result" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;"></div>
+
 <script>
 function fetchData() {
     const username = "your_username";
