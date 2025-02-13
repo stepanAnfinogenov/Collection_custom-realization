@@ -1,0 +1,32 @@
+<button onclick="fetchData()">Fetch Data</button>
+<div id="result" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;"></div>
+
+<script>
+function fetchData() {
+    const username = "your_username";
+    const password = "your_password";
+    const encodedCredentials = btoa(username + ":" + password);
+
+    fetch("https://mySite.com?name=test", {
+        method: "GET",
+        headers: {
+            "Authorization": "Basic " + encodedCredentials,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const errorText = await response.text(); // Get error message from response
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById("result").innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+    })
+    .catch(error => {
+        console.error("Fetch error:", error); // Log full error in console
+        document.getElementById("result").innerHTML = `<p style='color: red;'>Error: ${error.message}</p>`;
+    });
+}
+</script>
